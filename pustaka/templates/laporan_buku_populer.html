@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laporan Buku Populer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2C3E50;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        p.subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498DB;
+            color: white;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #D6EAF8;
+            cursor: pointer;
+        }
+        td {
+            font-size: 1rem;
+        }
+        @media (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+            table {
+                font-size: 0.9rem;
+            }
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Laporan Buku Populer</h1>
+    <p class="subtitle">Daftar buku dengan jumlah peminjaman terbanyak</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Judul Buku</th>
+                <th>Jumlah Peminjaman</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for buku in laporan_buku_populer %}
+            <tr>
+                <td>{{ buku.namaBuku }}</td>
+                <td>{{ buku.jumlah_peminjaman }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

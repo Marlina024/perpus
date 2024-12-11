@@ -1,0 +1,36 @@
+<!-- templates/pustaka/daftar_prodi.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Program Studi</title>
+</head>
+<body>
+    <h1>Daftar Program Studi</h1>
+    
+    <a href="{% url 'tambah_prodi' %}">Tambah Program Studi</a>  <!-- Link untuk tambah data -->
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Program Studi</th>
+                <th>Nama Program Studi</th>
+                <th>Opsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prodi in prodi_list %}
+                <tr>
+                    <td>{{ prodi.idProdi }}</td>
+                    <td>{{ prodi.namaProdi }}</td>
+                    <td>
+                        <a href="{% url 'edit_prodi' prodi.idProdi %}">Edit</a> |
+                        <a href="{% url 'hapus_prodi' prodi.idProdi %}">Hapus</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
