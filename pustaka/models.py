@@ -21,8 +21,12 @@ class Mahasiswa(models.Model):
     class Meta:
         verbose_name_plural = 'Mahasiswa'
 
+    @property
+    def nama_Prodi(self):
+        # Mengambil nama anggota peminjam dari model terkait
+        return self.idProdi.namaProdi
     def __str__(self):
-        return f'{self.nim} - {self.namaDepan} {self.namaBelakang} '
+        return f'{self.nim} - {self.namaDepan} {self.namaBelakang}- {self.idProdi.namaProdi} '
     
 class NoHp(models.Model):
     idNo = models.AutoField(primary_key=True, null=False, verbose_name="ID Nomor HP")
@@ -56,7 +60,7 @@ class Buku(models.Model):
     class Meta:
         verbose_name_plural ='Buku'
     def __str__(self):
-        return f'{self.idBuku}- {self.namaBuku}'
+        return f'{self.idBuku}- {self.namaBuku}- Jumlah Halaman: {self.juHal}'
     
 class Peminjaman(models.Model):
     idPin = models.AutoField(primary_key=True, null=False, verbose_name="ID Peminjaman")
@@ -78,12 +82,18 @@ class DetPin(models.Model):
     class Meta:
         verbose_name_plural = 'DetailPinjaman'
 
+    @property
+    def nama_peminjam(self):
+        # Mengambil nama anggota peminjam dari model terkait
+        return self.idPin.idAng.nama
+
     def __str__(self):
-        return f'{self.idDetPin} - {self.idBuku}'
+        # Menampilkan nama peminjam langsung tanpa ID
+        return f'{self.nama_peminjam} -{self.idBuku.namaBuku}'
 
 class Kategori(models.Model):
     idKat = models.CharField(max_length=30, primary_key=True, null=False, verbose_name="ID Kategori")
-    namaKat = models.CharField(max_length=12, null=False, verbose_name="Nama Kategori")
+    namaKat = models.CharField(max_length=100, null=False, verbose_name="Nama Kategori")
 
     class Meta:
         verbose_name_plural = 'NamaKategori'
@@ -101,4 +111,4 @@ class KatBuk(models.Model):
         verbose_name_plural = 'Detail Ketersediaan Buku'
 
     def __str__(self):
-        return f'{self.idKatBuk} - {self.idKat.namaKat}'
+        return f'{self.idKatBuk} - {self.idKat.namaKat}- Ketersediaan : {self.jlhBuku}'
